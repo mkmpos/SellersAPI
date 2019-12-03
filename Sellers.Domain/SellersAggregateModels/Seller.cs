@@ -22,5 +22,23 @@ namespace Sellers.Domain.SellersAggregateModels
         public bool Active { get; set; }
 
         public double Commision { get; set; }
+
+        public double CalculatePenaltyPercentage(double commision)
+        {
+            double penaltyPercentage = 10;
+            return (commision - (commision * (penaltyPercentage / 100)));
+        }
+
+        public bool VerifyDeactivate(bool newstate, bool oldstate)
+        {
+            if(newstate == false)
+            {
+                return newstate != oldstate;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

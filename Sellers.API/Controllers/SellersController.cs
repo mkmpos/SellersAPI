@@ -57,6 +57,13 @@ namespace Sellers.API.Controllers
 
             try
             {
+                Seller outdateseller = _sellerRepository.GetSeller(id).Result;
+
+                if(seller.VerifyDeactivate(seller.Active, outdateseller.Active))
+                {
+                    seller.Commision = seller.CalculatePenaltyPercentage(seller.Commision);
+                }
+
                 await _sellerRepository.UpdateSeller(seller);
             }
             catch (DbUpdateConcurrencyException)

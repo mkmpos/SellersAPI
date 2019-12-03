@@ -26,7 +26,7 @@ namespace Sellers.Infrastructure
 
         public async Task<Seller> GetSeller(int sellerid)
         {
-            return await _context.Sellers.FindAsync(sellerid);
+            return await _context.Sellers.AsNoTracking().SingleOrDefaultAsync(s => s.SellerID == sellerid);
         }
 
         public async Task UpdateSeller(Seller seller)
